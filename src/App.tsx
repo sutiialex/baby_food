@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {getFoodState, setFoodState} from "./api";
+import NextFoods from "./NextFoods";
+import AllowedFoods from "./AllowedFoods";
+import {AllowedFood, ConsumeEvent, FoodState} from "./model";
+import Consumed from "./Consumed";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [foods, setFoods] = useState<FoodState | undefined>();
+
+    useEffect(() => {
+        setFoods(getFoodState());
+    }, []);
+
+    useEffect(() => {
+        if (foods)
+            setFoodState(foods);
+    }, [foods]);
+
+    if (foods === undefined)
+        return <div>Loading...</div>;
+
+    return (
+        <>
+            <Consumed consumed={foods.consumed} />
+            <NextFoods allowedFoods={foods.allowedFoods} consumed={foods.consumed}
+                       onConsumeAdd={(e: ConsumeEvent) => setFoods({...foods, consumed: [...foods?.consumed, e]})}/>
+            <AllowedFoods foods={foods.allowedFoods} onFoodsChanged={(newAllowedFoods: AllowedFood[]) => {
+                setFoods({...foods, allowedFoods: newAllowedFoods});
+            }}/>
+        </>
+    );
 }
 
 export default App;
