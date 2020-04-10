@@ -23,8 +23,8 @@ function App() {
 
     return (
         <>
-            <Consumed consumed={foods.consumed} />
-            <NextFoods allowedFoods={foods.allowedFoods} consumed={foods.consumed}
+            <Consumed foodState={foods}/>
+            <NextFoods foodState={foods}
                        onConsumeAdd={(e: ConsumeEvent) => setFoods({...foods, consumed: [...foods?.consumed, e]})}/>
             <AllowedFoods foods={foods.allowedFoods} onFoodsChanged={(newAllowedFoods: AllowedFood[]) => {
                 setFoods({...foods, allowedFoods: newAllowedFoods});

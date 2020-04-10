@@ -1,7 +1,9 @@
 import React from 'react';
-import {ConsumeEvent} from "./model";
+import {FoodId, FoodState} from "./model";
 
-export default ({consumed}: { consumed: ConsumeEvent[] }) => {
+export default ({foodState: {consumed, allowedFoods}}: { foodState: FoodState }) => {
+    const findFoodById = (foodId: FoodId) => allowedFoods.find(f => f.id === foodId)?.name;
+
     return (
         <>
             <h1>Consumed:</h1>
@@ -14,8 +16,8 @@ export default ({consumed}: { consumed: ConsumeEvent[] }) => {
                 </thead>
                 <tbody>
                 {
-                    consumed.reverse().map(c => (<tr key={c.food}>
-                        <td>{c.food}</td>
+                    consumed.reverse().map(c => (<tr key={c.date.toDateString() + c.foodId}>
+                        <td>{findFoodById(c.foodId)}</td>
                         <td>{c.date.toDateString()}</td>
                     </tr>))
                 }

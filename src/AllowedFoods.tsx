@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {AllowedFood, PortionUnit} from "./model";
+import {randomId} from "./api";
 
-const replaceFood = (foods: AllowedFood[], food: AllowedFood) => foods.map(f => f.name === food.name ? food : f);
+const replaceFood = (foods: AllowedFood[], food: AllowedFood) => foods.map(f => f.id === food.id ? food : f);
 
 type Props = {
     foods: AllowedFood[],
@@ -10,6 +11,12 @@ type Props = {
 
 export default ({foods, onFoodsChanged}: Props) => {
     const [newFood, setNewFood] = useState<Partial<AllowedFood>>({});
+
+    const handleNameChanged = (food: AllowedFood) => (e: { target: { value: string } }) => {
+        const name = e.target.value;
+        if (name !== food.name)
+            onFoodsChanged(replaceFood(foods, {...food, name: name}));
+    };
 
     const handlePeriodChanged = (food: AllowedFood) => (e: { target: { value: string } }) => {
         const value = parseInt(e.target.value);
@@ -48,9 +55,9 @@ export default ({foods, onFoodsChanged}: Props) => {
                 </thead>
                 <tbody>
                 {foods.map(f => (
-                    <tr key={f.name}>
+                    <tr key={f.id}>
                         <td>
-                            {f.name}
+                            <input onChange={handleNameChanged(f)} value={f.name}/>
                         </td>
                         <td>
                             <input type="number" onChange={handlePeriodChanged(f)} value={f.period?.amount}/>days
@@ -100,7 +107,7 @@ export default ({foods, onFoodsChanged}: Props) => {
                                 onClick={() => {
                                     const name = newFood.name;
                                     if (name !== undefined) {
-                                        onFoodsChanged([...foods, {...newFood, name: name}]);
+                                        onFoodsChanged([...foods, {...newFood, id: randomId(), name: name}]);
                                     }
                                     setNewFood({});
                                 }}>

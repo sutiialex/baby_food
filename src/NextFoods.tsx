@@ -1,15 +1,12 @@
 import React from 'react';
-import {AllowedFood, ConsumeEvent} from "./model";
+import {ConsumeEvent, FoodState} from "./model";
 
-export default ({allowedFoods, consumed, onConsumeAdd}: { allowedFoods: AllowedFood[], consumed: ConsumeEvent[], onConsumeAdd: (e: ConsumeEvent) => void }) => {
+export default ({foodState: {allowedFoods, consumed}, onConsumeAdd}: { foodState: FoodState, onConsumeAdd: (e: ConsumeEvent) => void }) => {
     const consumedReverse = consumed.reverse();
 
     const foodsWithLastConsumed = allowedFoods.map(f => {
-        const lastConsumed: Date = consumedReverse.find(e => e.food === f.name)?.date || new Date(2020, 1, 1);
-        console.log(lastConsumed.toDateString());
-        console.log(new Date().getTime());
+        const lastConsumed: Date = consumedReverse.find(e => e.foodId === f.id)?.date || new Date(2020, 1, 1);
         const daysNotConsumed = Math.floor((new Date().getTime() - lastConsumed.getTime()) / 86400000);
-        console.log(daysNotConsumed);
         const daysOverdue = f.period !== undefined && daysNotConsumed > f.period.amount ? daysNotConsumed - f.period.amount : undefined;
 
         return {
@@ -42,13 +39,13 @@ export default ({allowedFoods, consumed, onConsumeAdd}: { allowedFoods: AllowedF
                 </thead>
                 <tbody>
                 {
-                    sortedFoods.map(f => (<tr key={f.name}>
+                    sortedFoods.map(f => (<tr key={f.id}>
                         <td>{f.name}</td>
                         <td>{f.daysOverdue}</td>
                         <td>{f.daysNotConsumed}</td>
                         <td>
                             <button onClick={() => {
-                                onConsumeAdd({food: f.name, date: new Date()})
+                                onConsumeAdd({foodId: f.id, date: new Date()})
                             }}>Consumed today
                             </button>
                         </td>

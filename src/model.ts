@@ -10,7 +10,10 @@ type Period = {
     unit: 'Day'
 }
 
+export type FoodId = number;
+
 export type AllowedFood = {
+    id: FoodId;
     name: string;
     period?: Period;
     portion?: Portion;
@@ -18,7 +21,7 @@ export type AllowedFood = {
 
 export type ConsumeEvent = {
     date: Date;
-    food: string;
+    foodId: FoodId;
 }
 
 export type FoodState = {
