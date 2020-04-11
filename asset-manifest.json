@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/baby_food/static/css/main.5f361e03.chunk.css",
-    "main.js": "/baby_food/static/js/main.89ac146b.chunk.js",
-    "main.js.map": "/baby_food/static/js/main.89ac146b.chunk.js.map",
-    "runtime-main.js": "/baby_food/static/js/runtime-main.1692884c.js",
-    "runtime-main.js.map": "/baby_food/static/js/runtime-main.1692884c.js.map",
-    "static/js/2.290da9f1.chunk.js": "/baby_food/static/js/2.290da9f1.chunk.js",
-    "static/js/2.290da9f1.chunk.js.map": "/baby_food/static/js/2.290da9f1.chunk.js.map",
+    "main.js": "/baby_food/static/js/main.b91655f6.chunk.js",
+    "main.js.map": "/baby_food/static/js/main.b91655f6.chunk.js.map",
+    "runtime-main.js": "/baby_food/static/js/runtime-main.90a66404.js",
+    "runtime-main.js.map": "/baby_food/static/js/runtime-main.90a66404.js.map",
+    "static/js/2.cc6f2df8.chunk.js": "/baby_food/static/js/2.cc6f2df8.chunk.js",
+    "static/js/2.cc6f2df8.chunk.js.map": "/baby_food/static/js/2.cc6f2df8.chunk.js.map",
     "index.html": "/baby_food/index.html",
-    "precache-manifest.9bb7e898e5e71682a780889375d595e5.js": "/baby_food/precache-manifest.9bb7e898e5e71682a780889375d595e5.js",
+    "precache-manifest.6609b4e0ecc22a1f5ee1ebaed31d1ffc.js": "/baby_food/precache-manifest.6609b4e0ecc22a1f5ee1ebaed31d1ffc.js",
     "service-worker.js": "/baby_food/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/baby_food/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.290da9f1.chunk.js.LICENSE.txt": "/baby_food/static/js/2.290da9f1.chunk.js.LICENSE.txt"
+    "static/js/2.cc6f2df8.chunk.js.LICENSE.txt": "/baby_food/static/js/2.cc6f2df8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1692884c.js",
-    "static/js/2.290da9f1.chunk.js",
+    "static/js/runtime-main.90a66404.js",
+    "static/js/2.cc6f2df8.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.89ac146b.chunk.js"
+    "static/js/main.b91655f6.chunk.js"
   ]
 }
