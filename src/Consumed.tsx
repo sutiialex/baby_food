@@ -16,9 +16,9 @@ export default ({foodState: {consumed, allowedFoods}}: { foodState: FoodState })
                 </thead>
                 <tbody>
                 {
-                    consumed.reverse().map(c => (<tr key={c.date.toDateString() + c.foodId}>
+                    consumed.reverse().map(c => (<tr key={c.date + c.foodId}>
                         <td>{findFoodById(c.foodId)}</td>
-                        <td>{c.date.toDateString()}</td>
+                        <td>{c.date}</td>
                     </tr>))
                 }
                 </tbody>

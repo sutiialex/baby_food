@@ -1,65 +1,104 @@
-import {FoodState} from "./model";
+import {AllowedFood, FoodState, Period, Portion} from "./model";
 
+import firebase from "firebase";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDZnw05t_TsI_B25nINqj7dzSkVS3ADx9Q",
+    authDomain: "babyfood-f264c.firebaseapp.com",
+    databaseURL: "https://babyfood-f264c.firebaseio.com",
+    projectId: "babyfood-f264c",
+    storageBucket: "babyfood-f264c.appspot.com",
+    messagingSenderId: "33974663086",
+    appId: "1:33974663086:web:fc8a8b6813021046c7ba3f"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
+
+firebase.auth().signInAnonymously();
 
 export const randomId = () => Math.random();
 
-let foodState: FoodState = {
-    allowedFoods: [
+const transformFoods = (foods: { name: string, period?: Period, portion?: Portion }[]): AllowedFood[] =>
+    foods.map(f => ({
+        id: randomId(),
+        name: f.name,
+        period: f.period || {amount: null, unit: "Day"},
+        portion: f.portion || {amount: null, unit: "Table Spoon"}
+    }));
+
+let defaultFoodState: FoodState = {
+    allowedFoods: transformFoods([
         {
-            id: randomId(),
+
             name: "Pindakaas",
-            period: {amount: 7, unit: "Day"},
-            portion: {amount: 7, unit: "Table Spoon"}
+            period: {amount: 7, unit: "Day" as "Day"},
+            portion: {amount: 7, unit: "Table Spoon" as "Table Spoon"}
         },
-        {id: randomId(), name: "Egg", period: {amount: 7, unit: "Day"}, portion: {amount: 7, unit: "Table Spoon"}},
-        {id: randomId(), name: "Water", period: {amount: 1, unit: "Day"}},
-        {id: randomId(), name: "Light fruit tea", period: {amount: 1, unit: "Day"}},
-        {id: randomId(), name: "Vitamin D", period: {amount: 1, unit: "Day"}, portion: {amount: 10, unit: "Drop"}},
-        {id: randomId(), name: "Bread", period: {amount: 2, unit: "Day"}},
-        {id: randomId(), name: "Hrisca"},
-        {id: randomId(), name: "Orez"},
-        {id: randomId(), name: "Amaranth"},
-        {id: randomId(), name: "Rosii"},
-        {id: randomId(), name: "Castraveti"},
-        {id: randomId(), name: "Peste", period: {amount: 3, unit: "Day"}},
-        {id: randomId(), name: "Carne", period: {amount: 3, unit: "Day"}},
-        {id: randomId(), name: "Dovleac"},
-        {id: randomId(), name: "Dovlecel"},
-        {id: randomId(), name: "Vinata"},
-        {id: randomId(), name: "Mar"},
-        {id: randomId(), name: "Para"},
-        {id: randomId(), name: "Alac"},
-        {id: randomId(), name: "Nuci", period: {amount: 7, unit: "Day"}},
-        {id: randomId(), name: "Cashew", period: {amount: 8, unit: "Day"}},
-        {id: randomId(), name: "Hazelnuts", period: {amount: 7, unit: "Day"}},
-        {id: randomId(), name: "Pecan", period: {amount: 9, unit: "Day"}},
-        {id: randomId(), name: "Fasole", period: {amount: 9, unit: "Day"}},
-        {id: randomId(), name: "Mazare", period: {amount: 9, unit: "Day"}},
-        {id: randomId(), name: "Bob", period: {amount: 11, unit: "Day"}},
-        {id: randomId(), name: "Linte", period: {amount: 9, unit: "Day"}},
-        {id: randomId(), name: "Creveti", period: {amount: 11, unit: "Day"}},
-        {id: randomId(), name: "Mango"},
-        {id: randomId(), name: "Banana"},
-        {id: randomId(), name: "Sparanghel"},
-        {id: randomId(), name: "Andiva"},
-        {id: randomId(), name: "Salata"},
-        {id: randomId(), name: "Varza"},
-        {id: randomId(), name: "Brocoli"},
-        {id: randomId(), name: "Conopida"},
-        {id: randomId(), name: "Boerenkool"},
-        {id: randomId(), name: "Plaintain"},
-        {id: randomId(), name: "Casava"},
-        {id: randomId(), name: "Capsuni"},
-        {id: randomId(), name: "Zmeura"},
-        {id: randomId(), name: "Plumbs"},
-        {id: randomId(), name: "Melon"},
-        {id: randomId(), name: "Cottage cheese"}
-    ],
+        {
+            name: "Egg",
+            period: {amount: 7, unit: "Day" as "Day"},
+            portion: {amount: 7, unit: "Table Spoon" as "Table Spoon"}
+        },
+        {name: "Water", period: {amount: 1, unit: "Day" as "Day"}},
+        {name: "Light fruit tea", period: {amount: 1, unit: "Day" as "Day"}},
+        {name: "Vitamin D", period: {amount: 1, unit: "Day" as "Day"}, portion: {amount: 10, unit: "Drop"}},
+        {name: "Bread", period: {amount: 2, unit: "Day" as "Day"}},
+        {name: "Hrisca"},
+        {name: "Orez"},
+        {name: "Amaranth"},
+        {name: "Rosii"},
+        {name: "Castraveti"},
+        {name: "Peste", period: {amount: 3, unit: "Day" as "Day"}},
+        {name: "Carne", period: {amount: 3, unit: "Day" as "Day"}},
+        {name: "Dovleac"},
+        {name: "Dovlecel"},
+        {name: "Vinata"},
+        {name: "Mar"},
+        {name: "Para"},
+        {name: "Alac"},
+        {name: "Nuci", period: {amount: 7, unit: "Day" as "Day"}},
+        {name: "Cashew", period: {amount: 8, unit: "Day" as "Day"}},
+        {name: "Hazelnuts", period: {amount: 7, unit: "Day" as "Day"}},
+        {name: "Pecan", period: {amount: 9, unit: "Day" as "Day"}},
+        {name: "Fasole", period: {amount: 9, unit: "Day" as "Day"}},
+        {name: "Mazare", period: {amount: 9, unit: "Day" as "Day"}},
+        {name: "Bob", period: {amount: 11, unit: "Day" as "Day"}},
+        {name: "Linte", period: {amount: 9, unit: "Day" as "Day"}},
+        {name: "Creveti", period: {amount: 11, unit: "Day" as "Day"}},
+        {name: "Mango"},
+        {name: "Banana"},
+        {name: "Sparanghel"},
+        {name: "Andiva"},
+        {name: "Salata"},
+        {name: "Varza"},
+        {name: "Brocoli"},
+        {name: "Conopida"},
+        {name: "Boerenkool"},
+        {name: "Plaintain"},
+        {name: "Casava"},
+        {name: "Capsuni"},
+        {name: "Zmeura"},
+        {name: "Plumbs"},
+        {name: "Melon"},
+        {name: "Cottage cheese"}
+    ]),
     consumed: []
 
 };
-export const getFoodState = () => foodState;
+export const getFoodState = (callback: (_: FoodState) => void) => {
+    database.ref("/food").once('value').then(snapshot => {
+        const state = snapshot.val();
+        if (!state) {
+            setFoodState(defaultFoodState);
+            callback(defaultFoodState)
+        } else {
+            callback(state);
+        }
+    });
+};
 
 export const setFoodState = (newState: FoodState) => {
-    foodState = newState;
+    database.ref("/food").set(newState).then();
 };

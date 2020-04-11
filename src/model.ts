@@ -1,12 +1,12 @@
 export type PortionUnit = 'Table Spoon' | 'Tea Spoon' | 'Drop' | 'Glass'
 
-type Portion = {
-    amount?: number;
+export type Portion = {
+    amount: number | null;
     unit: PortionUnit
 }
 
-type Period = {
-    amount: number;
+export type Period = {
+    amount: number | null;
     unit: 'Day'
 }
 
@@ -15,12 +15,12 @@ export type FoodId = number;
 export type AllowedFood = {
     id: FoodId;
     name: string;
-    period?: Period;
-    portion?: Portion;
+    period: Period;
+    portion: Portion;
 }
 
 export type ConsumeEvent = {
-    date: Date;
+    date: string;
     foodId: FoodId;
 }
 

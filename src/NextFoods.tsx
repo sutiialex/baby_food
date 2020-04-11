@@ -5,9 +5,11 @@ export default ({foodState: {allowedFoods, consumed}, onConsumeAdd}: { foodState
     const consumedReverse = consumed.reverse();
 
     const foodsWithLastConsumed = allowedFoods.map(f => {
-        const lastConsumed: Date = consumedReverse.find(e => e.foodId === f.id)?.date || new Date(2020, 1, 1);
+        const dateString: string | undefined = consumedReverse.find(e => e.foodId === f.id)?.date;
+        const date: Date | undefined = dateString ? new Date(dateString) : undefined;
+        const lastConsumed: Date = date || new Date(2020, 1, 1);
         const daysNotConsumed = Math.floor((new Date().getTime() - lastConsumed.getTime()) / 86400000);
-        const daysOverdue = f.period !== undefined && daysNotConsumed > f.period.amount ? daysNotConsumed - f.period.amount : undefined;
+        const daysOverdue = f.period.amount !== null && daysNotConsumed > f.period.amount ? daysNotConsumed - f.period.amount : undefined;
 
         return {
             ...f,
@@ -45,7 +47,7 @@ export default ({foodState: {allowedFoods, consumed}, onConsumeAdd}: { foodState
                         <td>{f.daysNotConsumed}</td>
                         <td>
                             <button onClick={() => {
-                                onConsumeAdd({foodId: f.id, date: new Date()})
+                                onConsumeAdd({foodId: f.id, date: new Date().toDateString()})
                             }}>Consumed today
                             </button>
                         </td>

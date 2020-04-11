@@ -10,7 +10,7 @@ function App() {
     const [foods, setFoods] = useState<FoodState | undefined>();
 
     useEffect(() => {
-        setFoods(getFoodState());
+        getFoodState(setFoods);
     }, []);
 
     useEffect(() => {
