@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {getFoodState, setFoodState} from "./api";
 import NextFoods from "./NextFoods";
-import AllowedFoods from "./AllowedFoods";
 import {AllowedFood, ConsumeEvent, FoodState} from "./model";
 import Consumed from "./Consumed";
+import AllowedFoods from "./AllowedFoods";
 
 function App() {
     const [foods, setFoods] = useState<FoodState | undefined>();
@@ -23,9 +23,14 @@ function App() {
 
     return (
         <>
-            <Consumed foodState={foods}/>
+            <Consumed foodState={foods} onDeleteEvent={e => {
+                setFoods({...foods, consumed: foods?.consumed.filter(c => c !== e)})
+            }}/>
             <NextFoods foodState={foods}
-                       onConsumeAdd={(e: ConsumeEvent) => setFoods({...foods, consumed: [...foods?.consumed, e]})}/>
+                       onConsumeAdd={(e: ConsumeEvent) => setFoods({
+                           ...foods,
+                           consumed: [e, ...foods?.consumed]
+                       })}/>
             <AllowedFoods foods={foods.allowedFoods} onFoodsChanged={(newAllowedFoods: AllowedFood[]) => {
                 setFoods({...foods, allowedFoods: newAllowedFoods});
             }}/>
