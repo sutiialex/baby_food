@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/baby_food/static/css/main.5f361e03.chunk.css",
-    "main.js": "/baby_food/static/js/main.1762204f.chunk.js",
-    "main.js.map": "/baby_food/static/js/main.1762204f.chunk.js.map",
+    "main.js": "/baby_food/static/js/main.2c80b18e.chunk.js",
+    "main.js.map": "/baby_food/static/js/main.2c80b18e.chunk.js.map",
     "runtime-main.js": "/baby_food/static/js/runtime-main.90a66404.js",
     "runtime-main.js.map": "/baby_food/static/js/runtime-main.90a66404.js.map",
     "static/js/2.cc6f2df8.chunk.js": "/baby_food/static/js/2.cc6f2df8.chunk.js",
     "static/js/2.cc6f2df8.chunk.js.map": "/baby_food/static/js/2.cc6f2df8.chunk.js.map",
     "index.html": "/baby_food/index.html",
-    "precache-manifest.e91858ae0e31bdda24bf08c184617d05.js": "/baby_food/precache-manifest.e91858ae0e31bdda24bf08c184617d05.js",
+    "precache-manifest.85c00b48f02a93eb4112090a57372d8f.js": "/baby_food/precache-manifest.85c00b48f02a93eb4112090a57372d8f.js",
     "service-worker.js": "/baby_food/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/baby_food/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.cc6f2df8.chunk.js.LICENSE.txt": "/baby_food/static/js/2.cc6f2df8.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.90a66404.js",
     "static/js/2.cc6f2df8.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.1762204f.chunk.js"
+    "static/js/main.2c80b18e.chunk.js"
   ]
 }

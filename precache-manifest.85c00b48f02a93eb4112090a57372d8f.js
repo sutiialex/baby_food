@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9e563c71b7998f026bf74392c6b7e03e",
+    "revision": "a5cef0181d9ffb4bc2c83f5bc9fd3764",
     "url": "/baby_food/index.html"
   },
   {
-    "revision": "fe931c52744b0b2b4f55",
+    "revision": "fd6777e2b6933ee88773",
     "url": "/baby_food/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/baby_food/static/js/2.cc6f2df8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "fe931c52744b0b2b4f55",
-    "url": "/baby_food/static/js/main.1762204f.chunk.js"
+    "revision": "fd6777e2b6933ee88773",
+    "url": "/baby_food/static/js/main.2c80b18e.chunk.js"
   },
   {
     "revision": "092aaeb480f7c357da1d",
