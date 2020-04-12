@@ -2,10 +2,8 @@ import React from 'react';
 import {ConsumeEvent, FoodState} from "./model";
 
 export default ({foodState: {allowedFoods, consumed}, onConsumeAdd}: { foodState: FoodState, onConsumeAdd: (e: ConsumeEvent) => void }) => {
-    const consumedReverse = consumed.reverse();
-
     const foodsWithLastConsumed = allowedFoods.map(f => {
-        const dateString: string | undefined = consumedReverse.find(e => e.foodId === f.id)?.date;
+        const dateString: string | undefined = consumed.find(e => e.foodId === f.id)?.date;
         const date: Date | undefined = dateString ? new Date(dateString) : undefined;
         const lastConsumed: Date = date || new Date(2020, 1, 1);
         const daysNotConsumed = Math.floor((new Date().getTime() - lastConsumed.getTime()) / 86400000);
